@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
     <!-- load bootstrap -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/angucomplete-alt.css">
     <style>
         html {
             overflow-y: scroll;
@@ -30,7 +31,7 @@
     <script src="angular.min.js"></script>
     <!-- load angular -->
     <script src="core.js"></script>
-    <script src="angucomplete.js"></script>
+    <script src="angucomplete-alt.js"></script>
 
 </head>
 <!-- SET THE CONTROLLER AND GET ALL MOVIES -->
@@ -45,24 +46,20 @@
 
         <div id="todo-form" class="row">
             <div class="col-sm-8 col-sm-offset-2 text-center">
-                <form>
+                <form> <!--selected-object="selectedMovie"-->
                     <div class="form-group">
-                        <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
-                        <input type="text" ng-model="query" ng-change="search()" name="query"
-                          class="form-control input-lg text-center" placeholder="eg.,Interstellar">
-
-                          <angucomplete id="ex1" placeholder="Search countries" pause="100" selectedobject="selectedCountry" localdata="movies.data" searchfields="originalTitle"
-                          titlefield="originalTitle" minlength="1" inputclass="form-control form-control-small"
-                          input-changed="selectedText" matchclass="highlight" />
+                          <div angucomplete-alt id="ex1" placeholder="Search Movies"
+                          maxlength="50" pause="100" selected-object="selectedMovie"
+                          local-data="movies" search-fields="originalTitle" title-field="originalTitle" minlength="1"
+                          input-class="form-control form-control-small" match-class="highlight" input-changed="selectedText">
                     </div>
                 </form>
             </div>
         </div>
 
 
-
         <div id="todo-list" class="row">
-            <div class="col-lg-3 col-md-3 col-sm-4" ng-repeat="movie in movies.data">
+            <div class="col-lg-3 col-md-3 col-sm-4" ng-repeat="movie in searchData.data">
                 <div class="thumbnail poster">
                     <figure>
                         <a href=""><img src="{{ movie.posterurl }}" alt="Poster name" style="width: 70%;" /></a>
@@ -75,7 +72,6 @@
                             <li><a href="">{{genre}}</a></li>
                         </ul>
                     </div>
-                    <button class="btn btn-primary btn-block">Book Now</button>
                 </div>
             </div>
         </div>

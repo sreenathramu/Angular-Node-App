@@ -48,7 +48,8 @@ app.get('/api/movies', function(req, res) {
 });
 
 app.get('/api/moviesFilter', function(req, res) {
-  Rated.find({originalTitle:{$regex:'/^'+req.query.q+'$/i'}},function(err, movies) {
+  console.log("In Node:"+req.query.q);
+  Rated.find({originalTitle:new RegExp(req.query.q, "i")},function(err, movies) {
       // if there is an error retrieving, send the error. nothing after res.send(err) will execute
       if (err)
           res.send(err)
